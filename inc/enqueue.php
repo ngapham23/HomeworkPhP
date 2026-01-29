@@ -1,5 +1,6 @@
 <?php
 $theme_version = '1.0.0';
+// Enqueue scripts and styles
 function aps_enqueue_assets()
 {
     global $theme_version;
