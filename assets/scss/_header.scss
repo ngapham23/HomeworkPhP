@@ -1,0 +1,135 @@
+.aps-topbar {
+    font-weight: 1000;
+    background-color: var(--color-white);
+    padding-top: 16px;
+    padding-bottom: 16px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.aps-logo {
+    display: flex;
+    align-items: center;
+}
+
+.aps-nav {
+    display: flex;
+    align-items: center;
+
+    ul {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+    }
+
+    li {
+        display: inline-flex;
+    }
+
+    &__link {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 26px;
+        color: var(--color-primary-blue-dark);
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: var(--color-primary-blue);
+        }
+
+        &--active {
+            color: var(--color-primary-blue);
+            border-bottom-color: var(--color-primary-blue);
+        }
+    }
+}
+
+.aps-icon-btn {
+    cursor: pointer;
+    border: none;
+    background: none;
+
+    img {
+        width: 24px;
+        height: 24px;
+        display: block;
+        flex-shrink: 0;
+    }
+}
+
+.aps-search-dropdown {
+    position: absolute;
+    top: calc(100% + -38px);
+    right: 310px;
+    width: 387px;
+    background: #6582fc;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(18, 24, 40, 0.12);
+    padding: 8px;
+    z-index: 1100;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease;
+
+    &.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &__form {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    &__input {
+        flex: 1;
+        border: 1px solid #E7E7E7;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 14px;
+        color: var(--color-text, #4C4C4C);
+        background: #fff;
+        outline: none;
+
+        &:focus {
+            border-color: var(--color-primary-blue, #2447F5);
+            box-shadow: 0 6px 18px rgba(36, 71, 245, 0.12);
+        }
+    }
+
+    &__submit {
+        &:hover {
+            opacity: .95;
+        }
+    }
+}
+
+
+.aps-mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    z-index: 1000;
+}
+
+.aps-mobile-toggle__icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.aps-logo--mobile {
+    display: none;
+}

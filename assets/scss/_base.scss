@@ -1,0 +1,115 @@
+:root {
+    /* Colors */
+    --color-primary-blue-dark: #140F50;
+    --color-primary-blue: #2447F5;
+    --color-white: #FFF;
+    --color-text: #4C4C4C;
+    --color-text-muted: #9FA1A4;
+    --color-border: #E7E7E7;
+    --color-bg-light: #F3F3F6;
+    --color-bg-overlay: rgba(255, 255, 255, 0.10);
+
+
+
+    /* Font Sizes */
+    --font-xs: 14px;
+    --font-sm: 16px;
+    --font-md: 18px;
+    --font-lg: 20px;
+    --font-xl: 24px;
+    --font-2xl: 32px;
+    --font-3xl: 40px;
+    --font-hero: 68px;
+
+
+}
+
+
+// Reset
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Fonts
+@font-face {
+    font-family: 'National 2 Condensed';
+    src: url('../fonts/national-2-condensed-bold.woff2') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto Serif';
+    src: url('../fonts/RobotoSerif-VariableFont_GRAD\,opsz\,wdth\,wght.ttf') format('truetype');
+    font-display: swap;
+}
+
+// font
+$font-primary: 'Roboto Serif';
+$font-heading: 'National 2 Condensed';
+
+// Mixins
+@mixin text-style($size, $weight, $line-height, $color) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height;
+    color: $color;
+}
+
+// Base styles
+body {
+    font-family: $font-primary;
+    background-color: var(--color-white);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-heading;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+// Global styles
+h3 {
+    @include text-style(var(--font-3xl), 700, 48px, var(--color-primary-blue-dark));
+}
+
+.aps {
+    &-subtitle {
+        @include text-style(var(--font-md), 400, 28px, var(--color-text));
+    }
+
+    &-text_medium {
+        @include text-style(var(--font-sm), 400, 26px, var(--color-text));
+    }
+
+    &-container {
+        max-width: 1290px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+#wpadminbar {
+    display: none;
+}
