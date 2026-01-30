@@ -3,15 +3,15 @@
         <a class="aps-logo aps-logo--desktop" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $logo = get_field('header_logo', 'option'); ?>
             <?php if ($logo): ?>
-            <img src="<?php echo esc_url(is_array($logo) ? $logo['url'] : $logo); ?>" alt="aps-logo" />
+                <img src="<?php echo esc_url(is_array($logo) ? $logo['url'] : $logo); ?>" alt="aps-logo" />
             <?php endif; ?>
         </a>
 
 
         <a class="aps-logo aps-logo--mobile" href="<?php echo esc_url(home_url('/')); ?>">
-            <?php $logo = get_field('header_logo', 'option'); ?>
+            <?php $logo_mobile = get_field('header_logo_mobile', 'option'); ?>
             <?php if ($logo): ?>
-            <img src="<?php echo esc_url(is_array($logo) ? $logo['url'] : $logo); ?>" alt="aps-logo" />
+                <img src="<?php echo esc_url(is_array($logo) ? $logo['url'] : $logo); ?>" alt="aps-logo" />
             <?php endif; ?>
         </a>
         <nav class="aps-nav">
@@ -27,9 +27,9 @@
         </nav>
         <?php $search_icon = get_field('header_search', 'option'); ?>
         <?php if ($search_icon): ?>
-        <button class="aps-icon-btn aps-icon-btn--search" aria-label="Search">
-            <?php echo $search_icon; ?>
-        </button>
+            <button class="aps-icon-btn aps-icon-btn--search" aria-label="Search">
+                <?php echo $search_icon; ?>
+            </button>
         <?php endif; ?>
         <button class="aps-mobile-toggle" aria-label="Toggle menu">
             <img src="<?php echo (aps_img . '/svg-icon/icon-mobileReponsive/Categories.svg'); ?>" alt="aps_mobile-menu"
