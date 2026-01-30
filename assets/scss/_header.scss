@@ -116,6 +116,8 @@
 }
 
 
+
+// Mobile Styles
 .aps-mobile-toggle {
     display: none;
     background: none;
@@ -131,5 +133,9 @@
 }
 
 .aps-logo--mobile {
+    display: none;
+}
+
+.aps-section__button-wrapper--mobile {
     display: none;
 }

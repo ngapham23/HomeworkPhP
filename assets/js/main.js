@@ -83,6 +83,12 @@ $(document).ready(function () {
                     slidesToShow: 3,
                     slidesToScroll: 1,
                     variableWidth: true
+                },
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+
                 }
             }
         ]
