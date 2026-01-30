@@ -56,7 +56,6 @@
                 <?php endwhile; ?>
             </div>
         <?php endif; ?>
-
     </div>
     </div>
 </section>
