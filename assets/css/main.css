@@ -397,6 +397,17 @@ h3 {
   opacity: 0.3;
 }
 
+.aps-footer__legal-link:hover {
+  color: var(--color-white);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
 /* End Footer */
 /* Hero */
 .aps-hero {
@@ -1003,14 +1014,16 @@ h3 {
     font-size: 24px;
     line-height: 32px;
   }
-  .aps-partners__logos {
+  .aps-partners__logos.slick-initialized {
     flex-wrap: nowrap;
   }
   .aps-footer {
     padding: 0 20px 0 20px;
   }
   .aps-footer__inner {
+    display: flex;
     padding: 32px 0 20px 0;
+    justify-content: center;
   }
   .aps-footer__col--about {
     display: flex;
@@ -1034,7 +1047,7 @@ h3 {
   .aps-footer__contact-address {
     max-width: 100%;
     color: var(--color-border);
-    font-size: 22.6px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 22px;
   }
@@ -1045,8 +1058,14 @@ h3 {
     width: 100%;
     min-width: 0;
     height: auto;
-    flex-direction: column;
-    padding: 20px 10px;
+    display: flex;
+    padding: 24px;
+    flex-wrap: wrap;
+  }
+  .aps-footer__newsletter-left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
   .aps-footer__title {
     font-size: var(--font-lg);
@@ -1062,21 +1081,31 @@ h3 {
   }
   .aps-footer__form {
     width: 100%;
-    min-width: 0;
-    padding: 4px 4px 4px 10px;
+    padding: 4px 4px 4px 20px;
   }
   .aps-footer__nav ul {
-    flex-direction: column;
-    gap: 12px;
-    -moz-column-gap: 0;
-         column-gap: 0;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 22px;
   }
   .aps-footer__bottom {
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
     gap: 8px;
-    padding: 12px 0;
+    padding: 16px 0;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  .aps-footer__copyright {
+    font-size: 12px;
+    line-height: 22px;
+  }
+  .aps-footer__legal {
+    font-size: 12px;
+    line-height: 22px;
   }
 }
 .aps-cards-inner.slick-initialized {
@@ -1103,4 +1132,8 @@ h3 {
   height: 525px;
   flex-shrink: 0;
   margin: 0;
+}
+
+.aps-partners__logos.slick-initialized {
+  display: block;
 }/*# sourceMappingURL=main.css.map */

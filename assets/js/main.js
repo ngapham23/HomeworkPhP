@@ -142,7 +142,30 @@ $(document).ready(function () {
 
     updateDots();
 });
-
-
+// Slick slider for partners logos
+$(document).ready(function () {
+    $('.aps-partners__logos').slick({
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 500,
+        arrows: false,
+        draggable: false,
+        swipe: false,
+        touchThreshold: 5,
+        cssEase: 'ease-out',
+        responsive: [
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 2
+                }
+            }
+        ]
+    });
+});
 
 
