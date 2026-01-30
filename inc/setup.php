@@ -31,3 +31,11 @@ function aps_theme_setup()
     ));
 }
 add_action('after_setup_theme', 'aps_theme_setup');
+
+// Allow SVG upload
+function aps_allow_svg_upload($mimes)
+{
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'aps_allow_svg_upload');
