@@ -10,8 +10,9 @@
 
         <a class="aps-logo aps-logo--mobile" href="<?php echo esc_url(home_url('/')); ?>">
             <?php $logo_mobile = get_field('header_logo_mobile', 'option'); ?>
-            <?php if ($logo): ?>
-                <img src="<?php echo esc_url(is_array($logo) ? $logo['url'] : $logo); ?>" alt="aps-logo" />
+            <?php if ($logo_mobile): ?>
+                <img src="<?php echo esc_url(is_array($logo_mobile) ? $logo_mobile['url'] : $logo_mobile); ?>"
+                    alt="aps-logo" />
             <?php endif; ?>
         </a>
         <nav class="aps-nav">
