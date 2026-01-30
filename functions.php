@@ -26,5 +26,5 @@ define('aps_img', get_template_directory_uri() . '/assets/image');
 require get_template_directory() . '/template-parts/partials/location-post.php';
 
 
-// // Register CPT "equipment"
-// require get_template_directory() . '/template-parts/custom-post-type/cpt-homepage/cpt-equipment.php';
+// Register CPT "equipment"
+require get_template_directory() . '/template-parts/partials/equipment-post.php';
