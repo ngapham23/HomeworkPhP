@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Search Results Page
- * 
- * Displays search results with filters for Location and Equipment post types
- * Searches in: Title, Content, ACF fields (address, amenities, equipment)
- */
+
 
 get_header();
 
