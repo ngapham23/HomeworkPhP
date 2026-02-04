@@ -87,6 +87,7 @@ h4,
 h5,
 h6 {
     font-family: $font-heading;
+    color: var(--color-primary-blue-dark);
 }
 
 ul,
@@ -123,3 +124,4 @@ h3 {
 #wpadminbar {
     display: none;
 }
+

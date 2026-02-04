@@ -100,11 +100,13 @@
 
 .aps-cards {
     position: relative;
-    width: 100%;
+    width: calc(100% + 60px);
+    margin-left: -30px;
     cursor: grab;
     user-select: none;
-    padding: 40px 0;
-    overflow: hidden;
+    padding: 40px 30px;
+    overflow-x: hidden;
+ 
 }
 
 .aps-cards:active {

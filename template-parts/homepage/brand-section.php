@@ -31,6 +31,7 @@ $view_all_link = post_type_exists('equipment') ? get_post_type_archive_link('equ
             </div>
         </div>
 
+
         <div class="aps-blog__cards">
             <?php if ($equipment_query->have_posts()): ?>
                 <?php while ($equipment_query->have_posts()):

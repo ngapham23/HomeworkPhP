@@ -29,7 +29,7 @@ $query_locationpost = new WP_Query([
             </div>
             <div class="aps-section__button-wrapper">
                 <a href="<?php echo esc_url($view_all_link ?: home_url('/')) ?>" class="aps-btn aps-btn--ghost">
-                    <?php esc_html_e('View All Equipment', 'aps-sa'); ?>
+                    <?php esc_html_e('View All Location', 'aps-sa'); ?>
                     <img src="<?php echo esc_url(aps_img . '/featured-section/icon-button/arrow-equiment.svg'); ?>"
                         alt="Arrow Equipment">
                 </a>
@@ -81,11 +81,11 @@ $query_locationpost = new WP_Query([
                                 </p>
                                 <p class="aps_card__captionE">
                                     <?php
-                                    $equipment = get_the_terms(get_the_ID(), 'equipment');
-                                    if ($equipment && !is_wp_error($equipment)) {
+                                    $equipments = get_the_terms(get_the_ID(), 'equipments');
+                                    if ($equipments && !is_wp_error($equipments)) {
                                         echo 'Equipment: ';
                                         $links = [];
-                                        foreach ($equipment as $eq) {
+                                        foreach ($equipments as $eq) {
                                             $links[] = '<a class="aps-tag" href="' . esc_url(get_term_link($eq)) . '">' . esc_html($eq->name) . '</a>';
                                         }
                                         echo implode(', ', $links);

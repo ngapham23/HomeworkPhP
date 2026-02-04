@@ -33,31 +33,35 @@ $url_mobile = $bg_mobile['url'] ?? '';
             <div class="location-content--box">
                 <div class="location-overview-col">
                     <?php
-                    $overview_group = get_field('overview_location');
-                    $overview_title = $overview_group['overview_title'] ?? '';
-                    $overview_subtitle = $overview_group['overview_subtitle'] ?? '';
+                   
+                    $overview_subtitle =get_field('overview_summary') ?? '';
                     ?>
-                    <h4 class="location-overview--title">
-                        <?php
-                        esc_html_e($overview_title);
+                    <h4 class="location-overview--title">Overview Summary</h4>
+                    <div class="location-overview--subtitle">
+
+                        <?php 
+                        if($overview_subtitle){
+                            echo $overview_subtitle;
+                        }else{
+                            echo 'No overview available';
+                        } 
                         ?>
-                    </h4>
-                    <p class="location-overview--subtitle">
-                        <?php esc_html_e($overview_subtitle); ?>
-                    </p>
+                    </div>
                 </div>
                 <div class="location-fulldes-col">
                     <?php
-                    $full_description = get_field('fuldes_location');
-                    $full_description_title = $full_description['fuldes_title'] ?? '';
-                    $full_description_subtitle = $full_description['fuldes_subtitle'] ?? '';
+                 
+                    $full_description_subtitle = get_field('full_description') ?? '';
                     ?>
-                    <h4 class="location-fulldes--title">
-                        <?php echo esc_html($full_description_title); ?>
-                    </h4>
-                    <p class="location-fulldes--subtitle">
-                        <?php echo esc_html($full_description_subtitle); ?>
-                    </p>
+                    <h4 class="location-fulldes--title">Full Description</h4>
+                    <div class="location-fulldes--subtitle">
+                        <?php 
+                        if($full_description_subtitle){
+                            echo $full_description_subtitle;
+                        }else{
+                            echo 'No full description available';
+                        }  ?>
+                    </div>
                 </div>
             </div>
 
@@ -121,58 +125,41 @@ $url_mobile = $bg_mobile['url'] ?? '';
 
         </div>
         <div class="location-amenities-row">
-            <?php
-            $amentites_box = get_field('amentites_box');
-            $amen_title = $amentites_box['amenties_title'] ?? '';
-            $amen_list = $amentites_box['amentities_subtitle'] ?? [];
-
-
-            if (is_array($amen_list)) {
-                $amen_list = array_slice($amen_list, 0, 3);
-            } else {
-                $amen_list = [];
-            }
-            ?>
             <h4 class="location-amenities--title">
-                <?php echo esc_html($amen_title); ?>
+                Amenities
             </h4>
             <div class="location-amenities-box">
-                <?php if (!empty($amen_list)): ?>
-                <?php foreach ($amen_list as $row): ?>
+    <?php
+    $amenities = get_field('amentities'); // repeater trả về array các row
+    if ($amenities) {
+        foreach ($amenities as $row) {
+            $amenities_icon     = $row['amentities_icon'] ?? '';
+            $amenities_taxonomy = $row['amentities_taxomony'] ?? '';
+            ?>
+            <p class="location-amenities--subtitle">
                 <?php
-                        $tax_field = $row['amen_subtitle'] ?? '';
-                        $img_html = $row['amentitie_img'] ?? '';
-                        ?>
-                <p class="location-amenities--subtitle">
-                    <?php
-                            if (!empty($img_html)) {
-                                echo $img_html;
-                            }
-                            if (!empty($tax_field)) {
-                                $term_obj = null;
+                if ($amenities_icon) {
+                    echo '<img src="' . esc_url($amenities_icon['url']) . '" alt="' . esc_attr($amenities_icon['alt']) . '">';
+                }
+               if ($amenities_taxonomy) {
+    if (is_numeric($amenities_taxonomy)) {
+        $term = get_term($amenities_taxonomy);
+        if ($term && !is_wp_error($term)) {
+            echo esc_html($term->name);
+        }
+    } 
+    elseif (is_object($amenities_taxonomy)) {
+        echo esc_html($amenities_taxonomy->name);
+    }
+}
+                ?>
+            </p>
+            <?php
+        }
+    }
+    ?>
+</div>
 
-                                if (is_array($tax_field)) {
-                                    $first = reset($tax_field);
-                                    if (is_object($first)) {
-                                        $term_obj = $first;
-                                    } elseif (is_numeric($first)) {
-                                        $term_obj = get_term($first);
-                                    }
-                                } elseif (is_object($tax_field)) {
-                                    $term_obj = $tax_field;
-                                } elseif (is_numeric($tax_field)) {
-                                    $term_obj = get_term($tax_field);
-                                }
-
-                                if ($term_obj && !is_wp_error($term_obj)) {
-                                    echo esc_html($term_obj->name);
-                                }
-                            }
-                            ?>
-                </p>
-                <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
         </div>
 
         <!-- Gallery Section -->
@@ -181,7 +168,7 @@ $url_mobile = $bg_mobile['url'] ?? '';
         if ($gallery):
             ?>
         <div class="location-gallery-wrapper">
-            <h4 class="location-gallery-title">Gallery</h4>
+            <h4 class="location-gallery--title">Gallery</h4>
             <!-- Mobile Gallery Slider -->
             <div class="location-gallery-slider-mobile">
                 <?php foreach ($gallery as $img): ?>
@@ -256,14 +243,16 @@ $url_mobile = $bg_mobile['url'] ?? '';
         <?php endif; ?>
 
 
-        <!-- Equipment List Section -->
+
+
+        <!-- Equipment List Section (Reverse Query) -->
         <?php
         $equipments = get_field('location_equipments');
         if ($equipments && is_array($equipments)): ?>
-        <div class="equipment-list-section">
-            <h4 class="equipment-list-title">Equipment List</h4>
-            <div class="location-equipment-listing">
-                <?php
+            <div class="equipment-list-section">
+                <h4 class="equipment-list--title">Equipment List</h4>
+                <div class="location-equipment-listing">
+                    <?php
                     $equipments_display = array_slice($equipments, 0, 11);
                     foreach ($equipments_display as $p):
                         $post_id = is_object($p) ? $p->ID : $p;
@@ -276,21 +265,23 @@ $url_mobile = $bg_mobile['url'] ?? '';
                             $thumb = get_template_directory_uri() . '/assets/image/logo.png';
                         }
                         ?>
-                <article class="location-equipment-card"
-                    onclick="window.location.href='<?php echo esc_url($permalink); ?>'" style="cursor: pointer;">
-                    <img class="location-equipment-card-img" src="<?php echo esc_url($thumb); ?>"
-                        alt="<?php echo esc_attr($title); ?>">
-                    <div class="location-equipment-card-content">
-                        <h6 class="location-equipment-card-title"><?php echo esc_html($title); ?></h6>
-                        <p class="location-equipment-card-text">
-                            <span><?php esc_html_e('View Details', 'aps-sa'); ?></span>
-                        </p>
-                    </div>
-                </article>
-                <?php endforeach; ?>
+                        <article class="location-equipment-card"
+                            onclick="window.location.href='<?php echo esc_url($permalink); ?>'" style="cursor: pointer;">
+                            <img class="location-equipment-card-img" src="<?php echo esc_url($thumb); ?>"
+                                alt="<?php echo esc_attr($title); ?>">
+                            <div class="location-equipment-card-content">
+                                <h6 class="location-equipment-card-title"><?php echo esc_html($title); ?></h6>
+                                <p class="location-equipment-card-text">
+                                    <span><?php esc_html_e('View Details', 'aps-sa'); ?></span>
+                                </p>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
+  
 
     </div>
+    
 </section>

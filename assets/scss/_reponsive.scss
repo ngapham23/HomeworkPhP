@@ -92,7 +92,7 @@
 
 
 
-    .aps-section--cards {
+        .aps-section--cards {
         padding: 40px 0 40px 0;
 
     }
@@ -124,10 +124,11 @@
     }
 
     .aps-cards {
-        padding: 0 20px;
-
+        width: 100%;
+        margin-left: 0;
+        padding: 40px 20px;
+        overflow-x: hidden;
     }
-
 
 
     .aps-cards-inner.slick-initialized .slick-slide,
@@ -291,6 +292,239 @@
 
 
 
+
+
+
+    // Location Single Page SCSS - Mobile 
+
+    .location_hero {
+        max-height: 326px;
+        background-image: var(--hero-bg-mobile);
+        margin-top: 0;
+    }
+
+    .aps-section--singlepage {
+        padding: 40px 20px;
+    }
+
+    .location-title {
+        font-size: 32px;
+        line-height: 40px;
+
+    }
+
+    .location-overview--title,
+    .location-fulldes--title,
+    .location-quickfact--title,
+    .location-amenities--title,
+    .location-gallery-title,
+    .equipment-list-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .location-overview--subtitle,
+    .location-fulldes--subtitle,
+    .location-quickfact--subtitle {
+      
+        font-size: 16px;
+        line-height: 26px;
+
+    }
+
+    .location-content-grid {
+        grid-template-columns: 1fr;
+        padding: 28px 0;
+        gap: 0;
+    }
+
+    .location-overview--subtitle {
+        padding: 12px 0 28px 0;
+    }
+
+    .location-fulldes--subtitle {
+        padding: 12px 0 0 0;
+    }
+
+
+    .location-quickfact-col {
+        grid-column: 1 / -1;
+        padding: 28px 0 0 0;
+    }
+
+    .location-quickfacts-box {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .location-region,
+    .location-coordinates,
+    .location-type {
+        padding-top: 12px;
+    }
+
+    .location-type {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+
+
+
+    .location-amenities-row {
+        padding: 0 0 28px 0;
+    }
+
+    .location-amenities--title {
+        padding-bottom: 12px;
+    }
+
+    .location-amenities-box {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    /* Mobile Gallery */
+    .location-gallery-wrapper {
+        padding-top: 0;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .location-gallery-slider-mobile {
+        display: block;
+        margin-bottom: 20px;
+        touch-action: pan-y;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+    }
+
+    .location-gallery-slider-mobile .slick-list,
+    .location-gallery-slider-mobile .slick-track {
+        touch-action: pan-y;
+    }
+
+    .gallery-item-mobile {
+        height: 280px;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-right: 12px;
+    }
+
+    .gallery-item-mobile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .location-slider-dots {
+        display: flex;
+    }
+
+    .location-gallery-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 12px;
+        padding: 12px 0 28px 0;
+    }
+
+    .gallery-main-img {
+        height: 280px;
+    }
+
+    .gallery-sub-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .gallery-sub-item {
+        height: 120px;
+    }
+
+    .location-gallery-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    /* Custom GLightbox style for mobile */
+    .gslide-media.gslide-image img {
+        max-width: 90vw ;
+        max-height: 80vh ;
+        object-fit: contain;
+    }
+
+    /* list equiment */
+
+    .location-equipment-listing {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, auto);
+    }
+
+
+    .location-equipment-card {
+        display: flex;
+        width: 165px;
+        padding: 20px 12px 16px 12px;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .location-equipment-card-content {
+        display: flex;
+        align-items: center;
+    }
+
+
+    .location-equipment-card-title {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .location-equipment-card-text {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+    }
+
+
+    //  Equipment singlepage
+    .equipment-middle-box {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+
+    // single equipment
+    .equipment-bottom-box--post {
+        padding: 40px 0;
+    }
+
+    .equipment-bottom-box--card {
+        width: 100% !important;
+        margin: 0 auto;
+    }
+
+    .equipment-bottom-box--inner .slick-list {
+        padding: 0;
+    }
+
+    .aps-slider-dots {
+        display: block !important;
+        text-align: center;
+        margin-top: 24px;
+        width: 100%;
+    }
+
+    .aps-slider-dots svg {
+        cursor: pointer;
+    }
 
 
     // footer

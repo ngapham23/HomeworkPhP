@@ -34,3 +34,87 @@ function aps_footer_link_class($atts, $item, $args)
     return $atts;
 }
 add_filter('nav_menu_link_attributes', 'aps_footer_link_class', 10, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function aps_search_acf_fields($search, $query)
+{
+    global $wpdb;
+
+    if (!$query->is_search() || !$query->is_main_query()) {
+        return $search;
+    }
+
+    $search_term = $query->get('s');
+    if (empty($search_term)) {
+        return $search;
+    }
+
+    // Add ACF meta fields to search
+    $search_meta = " OR (
+        {$wpdb->postmeta}.meta_key = '_aps_location' 
+        AND {$wpdb->postmeta}.meta_value LIKE '%" . esc_sql($wpdb->esc_like($search_term)) . "%'
+    )";
+
+    $search = preg_replace(
+        "/\(\s*{$wpdb->posts}.post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+        "({$wpdb->posts}.post_title LIKE $1) OR ({$wpdb->posts}.post_content LIKE $1) {$search_meta}",
+        $search
+    );
+
+    return $search;
+}
+
+function aps_search_acf_join($join, $query)
+{
+    global $wpdb;
+
+    if (!$query->is_search() || !$query->is_main_query()) {
+        return $join;
+    }
+
+    $join .= " LEFT JOIN {$wpdb->postmeta} ON {$wpdb->posts}.ID = {$wpdb->postmeta}.post_id ";
+    return $join;
+}
+
+function aps_search_acf_groupby($groupby, $query)
+{
+    global $wpdb;
+
+    if (!$query->is_search() || !$query->is_main_query()) {
+        return $groupby;
+    }
+
+    $groupby = "{$wpdb->posts}.ID";
+    return $groupby;
+}
+
+/**
+ * Filter Search by Post Type
+ */
+function aps_search_filter_post_type($query)
+{
+    if (!is_admin() && $query->is_search() && $query->is_main_query()) {
+        $post_type = isset($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : 'all';
+
+        if ($post_type !== 'all') {
+            $query->set('post_type', $post_type);
+        } else {
+            $query->set('post_type', ['location', 'equipment', 'post', 'page']);
+        }
+    }
+}
+add_action('pre_get_posts', 'aps_search_filter_post_type');
