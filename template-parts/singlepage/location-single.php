@@ -33,32 +33,32 @@ $url_mobile = $bg_mobile['url'] ?? '';
             <div class="location-content--box">
                 <div class="location-overview-col">
                     <?php
-                   
-                    $overview_subtitle =get_field('overview_summary') ?? '';
+
+                    $overview_subtitle = get_field('overview_summary') ?? '';
                     ?>
                     <h4 class="location-overview--title">Overview Summary</h4>
                     <div class="location-overview--subtitle">
 
-                        <?php 
-                        if($overview_subtitle){
+                        <?php
+                        if ($overview_subtitle) {
                             echo $overview_subtitle;
-                        }else{
+                        } else {
                             echo 'No overview available';
-                        } 
+                        }
                         ?>
                     </div>
                 </div>
                 <div class="location-fulldes-col">
                     <?php
-                 
+
                     $full_description_subtitle = get_field('full_description') ?? '';
                     ?>
                     <h4 class="location-fulldes--title">Full Description</h4>
                     <div class="location-fulldes--subtitle">
-                        <?php 
-                        if($full_description_subtitle){
+                        <?php
+                        if ($full_description_subtitle) {
                             echo $full_description_subtitle;
-                        }else{
+                        } else {
                             echo 'No full description available';
                         }  ?>
                     </div>
@@ -129,36 +129,35 @@ $url_mobile = $bg_mobile['url'] ?? '';
                 Amenities
             </h4>
             <div class="location-amenities-box">
-    <?php
-    $amenities = get_field('amentities'); // repeater trả về array các row
-    if ($amenities) {
-        foreach ($amenities as $row) {
-            $amenities_icon     = $row['amentities_icon'] ?? '';
-            $amenities_taxonomy = $row['amentities_taxomony'] ?? '';
-            ?>
-            <p class="location-amenities--subtitle">
                 <?php
-                if ($amenities_icon) {
-                    echo '<img src="' . esc_url($amenities_icon['url']) . '" alt="' . esc_attr($amenities_icon['alt']) . '">';
-                }
-               if ($amenities_taxonomy) {
-    if (is_numeric($amenities_taxonomy)) {
-        $term = get_term($amenities_taxonomy);
-        if ($term && !is_wp_error($term)) {
-            echo esc_html($term->name);
-        }
-    } 
-    elseif (is_object($amenities_taxonomy)) {
-        echo esc_html($amenities_taxonomy->name);
-    }
-}
+                $amenities = get_field('amentities'); // repeater trả về array các row
+                if ($amenities) {
+                    foreach ($amenities as $row) {
+                        $amenities_icon     = $row['amentities_icon'] ?? '';
+                        $amenities_taxonomy = $row['amentities_taxomony'] ?? '';
                 ?>
-            </p>
-            <?php
-        }
-    }
-    ?>
-</div>
+                        <p class="location-amenities--subtitle">
+                            <?php
+                            if ($amenities_icon) {
+                                echo '<img src="' . esc_url($amenities_icon['url']) . '" alt="' . esc_attr($amenities_icon['alt']) . '">';
+                            }
+                            if ($amenities_taxonomy) {
+                                if (is_numeric($amenities_taxonomy)) {
+                                    $term = get_term($amenities_taxonomy);
+                                    if ($term && !is_wp_error($term)) {
+                                        echo esc_html($term->name);
+                                    }
+                                } elseif (is_object($amenities_taxonomy)) {
+                                    echo esc_html($amenities_taxonomy->name);
+                                }
+                            }
+                            ?>
+                        </p>
+                <?php
+                    }
+                }
+                ?>
+            </div>
 
         </div>
 
@@ -166,80 +165,82 @@ $url_mobile = $bg_mobile['url'] ?? '';
         <?php
         $gallery = get_field('location_gallery');
         if ($gallery):
-            ?>
-        <div class="location-gallery-wrapper">
-            <h4 class="location-gallery--title">Gallery</h4>
-            <!-- Mobile Gallery Slider -->
-            <div class="location-gallery-slider-mobile">
-                <?php foreach ($gallery as $img): ?>
-                <div class="gallery-item-mobile">
-                    <a href="<?php echo esc_url($img['url']); ?>" class="glightbox"
-                        data-gallery="location-gallery-mobile">
-                        <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
-                    </a>
-                </div>
-                <?php endforeach; ?>
-            </div>
-
-            <!-- Desktop Gallery Grid -->
-            <div class="location-gallery-grid desktop-only">
-                <!-- Main Image (First Image) -->
-                <div class="gallery-main-img">
-                    <?php if (isset($gallery[0])): ?>
-                    <a href="<?php echo esc_url($gallery[0]['url']); ?>" class="glightbox"
-                        data-gallery="location-gallery">
-                        <img src="<?php echo esc_url($gallery[0]['url']); ?>"
-                            alt="<?php echo esc_attr($gallery[0]['alt']); ?>">
-                    </a>
-                    <?php endif; ?>
-                    <button class="btn-view-all-photo" onclick="document.querySelector('.glightbox').click();">
-                        <img class="image-icon"
-                            src="<?php echo get_template_directory_uri(); ?>/assets/image/singlepage/Image.svg" alt="">
-                        <span class="view-all-photo">View All Photo</span>
-                    </button>
+        ?>
+            <div class="location-gallery-wrapper">
+                <h4 class="location-gallery--title">Gallery</h4>
+                <!-- Mobile Gallery Slider -->
+                <div class="location-gallery-slider-mobile">
+                    <?php foreach ($gallery as $img): ?>
+                        <div class="gallery-item-mobile">
+                            <a href="<?php echo esc_url($img['url']); ?>" class="glightbox"
+                                data-gallery="location-gallery-mobile">
+                                <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
 
-                <!-- Sub Images  -->
-                <div class="gallery-sub-grid">
-                    <?php
+                <!-- Desktop Gallery Grid -->
+                <div class="location-gallery-grid desktop-only">
+                    <!-- Main Image (First Image) -->
+                    <div class="gallery-main-img">
+                        <?php if (isset($gallery[0])): ?>
+                            <a href="<?php echo esc_url($gallery[0]['url']); ?>" class="glightbox"
+                                data-gallery="location-gallery">
+                                <img src="<?php echo esc_url($gallery[0]['url']); ?>"
+                                    alt="<?php echo esc_attr($gallery[0]['alt']); ?>">
+                            </a>
+                        <?php endif; ?>
+                        <button class="btn-view-all-photo" onclick="document.querySelector('.glightbox').click();">
+                            <img class="image-icon"
+                                src="<?php echo get_template_directory_uri(); ?>/assets/image/singlepage/Image.svg" alt="">
+                            <span class="view-all-photo">View All Photo</span>
+                        </button>
+                    </div>
+
+                    <!-- Sub Images  -->
+                    <div class="gallery-sub-grid">
+                        <?php
                         // First 4 images are shown in grid (skipping the main one)
                         $sub_images = array_slice($gallery, 1, 4);
                         foreach ($sub_images as $img):
-                            ?>
-                    <div class="gallery-sub-item">
-                        <a href="<?php echo esc_url($img['url']); ?>" class="glightbox" data-gallery="location-gallery">
-                            <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
-                        </a>
-                    </div>
-                    <?php endforeach; ?>
+                        ?>
+                            <div class="gallery-sub-item">
+                                <a href="<?php echo esc_url($img['url']); ?>" class="glightbox" data-gallery="location-gallery">
+                                    <img src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>">
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
 
-                    <?php
+                        <?php
                         // Hidden links for the rest of the images
                         $remaining_images = array_slice($gallery, 5);
                         if (!empty($remaining_images)):
                             foreach ($remaining_images as $img):
-                                ?>
-                    <a href="<?php echo esc_url($img['url']); ?>" class="glightbox" data-gallery="location-gallery"
-                        style="display: none;"></a>
-                    <?php
+                        ?>
+                                <a href="<?php echo esc_url($img['url']); ?>" class="glightbox" data-gallery="location-gallery"
+                                    style="display: none;"></a>
+                        <?php
                             endforeach;
                         endif;
                         ?>
+                    </div>
+                </div>
+
+
+                <div class="location-slider-dots" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 62 20" fill="none">
+                        <circle class="location-dot-circle" data-slide="0" cx="10" cy="10" r="9.5" stroke="#140F50" />
+                        <circle class="location-dot-inner" data-slide="0" cx="10" cy="10" r="4" fill="#140F50" />
+                        <circle class="location-dot-circle" data-slide="1" cx="34" cy="10" r="3.5" stroke="#140F50" />
+                        <circle class="location-dot-inner" data-slide="1" cx="34" cy="10" r="4" fill="#140F50"
+                            opacity="0" />
+                        <circle class="location-dot-circle" data-slide="2" cx="58" cy="10" r="3.5" stroke="#140F50" />
+                        <circle class="location-dot-inner" data-slide="2" cx="58" cy="10" r="4" fill="#140F50"
+                            opacity="0" />
+                    </svg>
                 </div>
             </div>
-            <div class="location-slider-dots" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 62 20" fill="none">
-                    <circle class="location-dot-circle" data-slide="0" cx="10" cy="10" r="9.5" stroke="#140F50" />
-                    <circle class="location-dot-inner" data-slide="0" cx="10" cy="10" r="4" fill="#140F50" />
-                    <circle class="location-dot-circle" data-slide="1" cx="34" cy="10" r="3.5" stroke="#140F50" />
-                    <circle class="location-dot-inner" data-slide="1" cx="34" cy="10" r="4" fill="#140F50"
-                        opacity="0" />
-                    <circle class="location-dot-circle" data-slide="2" cx="58" cy="10" r="3.5" stroke="#140F50" />
-                    <circle class="location-dot-inner" data-slide="2" cx="58" cy="10" r="4" fill="#140F50"
-                        opacity="0" />
-                </svg>
-            </div>
-        </div>
         <?php endif; ?>
 
 
@@ -264,7 +265,7 @@ $url_mobile = $bg_mobile['url'] ?? '';
                         if (!$thumb) {
                             $thumb = get_template_directory_uri() . '/assets/image/logo.png';
                         }
-                        ?>
+                    ?>
                         <article class="location-equipment-card"
                             onclick="window.location.href='<?php echo esc_url($permalink); ?>'" style="cursor: pointer;">
                             <img class="location-equipment-card-img" src="<?php echo esc_url($thumb); ?>"
@@ -280,8 +281,8 @@ $url_mobile = $bg_mobile['url'] ?? '';
                 </div>
             </div>
         <?php endif; ?>
-  
+
 
     </div>
-    
+
 </section>
