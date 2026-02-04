@@ -5,4 +5,3 @@ if (!defined('ABSPATH')) {
 get_header();
 get_template_part('/template-parts/singlepage/equipment-single');
 get_footer();
-?>

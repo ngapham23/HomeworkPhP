@@ -1,0 +1,5 @@
+# Ignore agent folder
+.agent/
+
+# Ignore package.json
+package.json
