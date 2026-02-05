@@ -100,39 +100,40 @@
 
 .aps-cards {
     position: relative;
-    width: calc(100% + 60px);
-    margin-left: -30px;
-    cursor: grab;
-    user-select: none;
-    padding: 40px 30px;
-    overflow-x: hidden;
- 
-}
-
-.aps-cards:active {
-    cursor: grabbing;
+    width: 100%;
+    padding: 40px 0;
+    
 }
 
 .aps-cards-inner {
-    display: flex;
-    gap: 30px;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; 
+    width: 100%;
     transition: all 0.5s ease;
+
+    &.slick-initialized {
+    display: block; 
+    }
+    .slick-list {
+            margin: 0 -15px; 
+        }
+    &:active {
+    cursor: grabbing;
 }
 
-.aps_card {
-    width: 410px;
-    height: 525px;
+}
+  .aps_card {
     border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 5px 5px 0 rgba(28, 36, 51, 0.10);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex-shrink: 0;
-}
-
-.aps_card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 9px 34px rgba(0, 0, 0, 0.2);
+    margin: 10px 15px;
+    width: auto;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 5px 0 rgba(28, 36, 51, 0.10);
+    }
 }
 
 .aps_card__img {
@@ -140,9 +141,16 @@
     border-radius: 8px 8px 0 0;
     width: 100%;
     display: block;
-
+    object-fit: cover;
+   top: 0;       /* <-- Thêm dòng này */
+    left: 0;   
 }
-
+.aps_card__link {
+    position: relative;
+    width: 100%;
+    display: block;
+    padding-bottom: 56%;
+}
 .aps_card__body {
     padding: 20px;
     /* display: flex;
@@ -269,6 +277,10 @@
     gap: 40px;
 }
 
+.aps-guide__title {
+    padding-bottom: 12px;
+}
+
 .aps-guide__step {
     text-align: center;
     display: flex;
@@ -336,18 +348,26 @@
 }
 
 .aps-blog__card {
-    padding: 12px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-    border-radius: 12px;
-    background: var(--color-white);
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  border-radius: 12px;
+  background: var(--color-white);
+  transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); 
 
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 9px 34px rgba(0, 0, 0, 0.2);
+  }
 }
+
+
 
 .aps-blog__card-img {
     border-radius: 12px;
+
 }
 
 .aps-blog__card-title {

@@ -1,3 +1,5 @@
+
+
 @media (max-width: 576px) {
 
     // header
@@ -63,6 +65,7 @@
 
     /* Hero Section */
     .aps-hero {
+        margin-top: 23px;
         max-height: 326px;
         background-image: var(--hero-bg-mobile);
     }
@@ -89,10 +92,7 @@
 
     // Featured section
 
-
-
-
-        .aps-section--cards {
+    .aps-section--cards {
         padding: 40px 0 40px 0;
 
     }
@@ -100,6 +100,7 @@
     .aps-section__header {
         display: flex;
         flex-direction: column;
+        padding: 0 20px;
     }
 
     .aps-section__title-wrapper {
@@ -119,30 +120,20 @@
 
     .aps-subtitle {
         font-size: 18px;
-        max-width: 359px;
+        max-width: 300px;
         line-height: 26px;
     }
 
     .aps-cards {
-        width: 100%;
-        margin-left: 0;
-        padding: 40px 20px;
-        overflow-x: hidden;
+        padding: 0 10px;
+     
     }
 
-
-    .aps-cards-inner.slick-initialized .slick-slide,
-    .aps-cards-inner.slick-initialized .aps_card {
-        width: 100vw !important;
-    }
-
-    .aps-cards-inner.slick-initialized .slick-list {
-        overflow: hidden !important;
-    }
-
+  
+    
 
     .aps-slider-dots {
-        padding: 40px 0;
+        padding: 30px 0;
     }
 
 
@@ -326,7 +317,7 @@
     .location-overview--subtitle,
     .location-fulldes--subtitle,
     .location-quickfact--subtitle {
-      
+
         font-size: 16px;
         line-height: 26px;
 
@@ -454,13 +445,15 @@
 
     /* Custom GLightbox style for mobile */
     .gslide-media.gslide-image img {
-        max-width: 90vw ;
-        max-height: 80vh ;
+        max-width: 90vw;
+        max-height: 80vh;
         object-fit: contain;
     }
 
     /* list equiment */
-
+.equipment-list--title{
+    padding-top:28px;
+}
     .location-equipment-listing {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(5, auto);
@@ -504,6 +497,7 @@
     // single equipment
     .equipment-bottom-box--post {
         padding: 40px 0;
+        overflow: hidden;
     }
 
     .equipment-bottom-box--card {
@@ -511,18 +505,15 @@
         margin: 0 auto;
     }
 
-    .equipment-bottom-box--inner .slick-list {
-        padding: 0;
-    }
 
-    .aps-slider-dots {
+    .equipment-slider-dots {
         display: block !important;
         text-align: center;
         margin-top: 24px;
         width: 100%;
     }
 
-    .aps-slider-dots svg {
+    .equipment-slider-dots svg {
         cursor: pointer;
     }
 
@@ -637,4 +628,16 @@
         line-height: 22px;
     }
 
+}
+
+
+@media (max-width: 400px) {
+    .aps_card {
+        width: 90vw;   
+        max-width: 700px;
+  
+    }
+    
+  
+   
 }
