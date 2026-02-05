@@ -2,12 +2,16 @@
 /*
 Template Name: Home Page
 */
-
 get_header();
-get_template_part('template-parts/homepage/hero-section');
-get_template_part('template-parts/homepage/featured-section');
-get_template_part('template-parts/homepage/map-section');
-get_template_part('template-parts/homepage/benefit-section');
-get_template_part('template-parts/homepage/brand-section');
-get_template_part('template-parts/homepage/partners-section');
+$sections = [
+    'hero-section',
+    'featured-section',
+    'map-section',
+    'benefit-section',
+    'brand-section',
+    'partners-section',
+];
+foreach ($sections as $section) {
+    get_template_part('template-parts/homepage/' . $section);
+}
 get_footer();
