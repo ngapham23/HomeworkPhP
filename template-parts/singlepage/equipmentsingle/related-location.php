@@ -3,74 +3,30 @@
             <div class="equipment-bottom-box--post">
                 <div class="equipment-bottom-box--inner">
                     <?php
-                    $related_locations = get_field('post_location');
-                    if ($related_locations) {
-                        // Limit to 3 posts
-                        $related_locations = array_slice($related_locations, 0, 3);
+                    $current_equipment_id = get_the_ID();
 
-                        foreach ($related_locations as $location_id) {
-                            $post = get_post($location_id);
-                            setup_postdata($post);
+                    $args = array(
+                        'post_type' => 'location',
+                        'posts_per_page' => 3,
+                        'meta_query' => array(
+                            array(
+                                'key' => 'featured_equipment',
+                                'value' => '"' . $current_equipment_id . '"',
+                                'compare' => 'LIKE'
+                            )
+                        )
+                    );
+                    $related_query = new WP_Query($args);
+
+                    if ($related_query->have_posts()) {
+                        while ($related_query->have_posts()) {
+                            $related_query->the_post();
+                            $location_id = get_the_ID();
                     ?>
-                            <article <?php post_class('equipment-bottom-box--card', $location_id); ?> id="post-<?php echo $location_id; ?>">
-                                <?php if (has_post_thumbnail($location_id)): ?>
-                                    <?php echo get_the_post_thumbnail($location_id, 'medium', ['class' => 'equipment-bottom-box--card__img']); ?>
-                                <?php else: ?>
-                                    <img class="equipment-bottom-box--card__img" src="<?php echo esc_url($default_image); ?>" alt="Default Image" />
-                                <?php endif; ?>
-
-                                <div class="equipment-bottom-box--card__body">
-                                    <p class="equipment-bottom-box--card__meta">
-                                        <img src="<?php echo esc_url(aps_img . '/featured-section/icon-location/location-icon.svg'); ?>" alt="Location">
-                                        <?php
-                                        $address = get_post_meta($location_id, '_aps_location', true);
-                                        if ($address) {
-                                            echo esc_html($address);
-                                        }
-                                        ?>
-                                    </p>
-
-                                    <h5 class="equipment-bottom-box--card__title"><?php echo esc_html(get_the_title($location_id)); ?></h5>
-
-                                    <p class="equipment-bottom-box--card__captionA">
-                                        <?php
-                                        $amenities = get_the_terms($location_id, 'amentitis');
-                                        if ($amenities && !is_wp_error($amenities)) {
-                                            echo 'Amenities: ';
-                                            $links = [];
-                                            foreach ($amenities as $amenity) {
-                                                $links[] = '<a class="aps-tag" href="' . esc_url(get_term_link($amenity)) . '">' . esc_html($amenity->name) . '</a>';
-                                            }
-                                            echo implode(', ', $links);
-                                        } else {
-                                            echo esc_html(wp_trim_words(get_the_excerpt($location_id), 20, '...'));
-                                        }
-                                        ?>
-                                    </p>
-
-                                    <p class="equipment-bottom-box--card__captionE">
-                                        <?php
-                                        $equipments = get_the_terms($location_id, 'equipments');
-                                        if ($equipments && !is_wp_error($equipments)) {
-                                            echo 'Equipment: ';
-                                            $links = [];
-                                            foreach ($equipments as $eq) {
-                                                $links[] = '<a class="aps-tag" href="' . esc_url(get_term_link($eq)) . '">' . esc_html($eq->name) . '</a>';
-                                            }
-                                            echo implode(', ', $links);
-                                        } else {
-                                            echo esc_html(wp_trim_words(get_the_excerpt($location_id), 20, '...'));
-                                        }
-                                        ?>
-                                    </p>
-
-                                    <hr class=" equipment-bottom-box--card__divider">
-                                    <a href="<?php echo esc_url(get_permalink($location_id)); ?>" class="equipment-bottom-box--card__btn">
-                                        Explore Park
-                                        <img src="<?php echo esc_url(aps_img . '/featured-section/icon-button/arrow-card.svg'); ?>" alt="Arrow Right">
-                                    </a>
-                                </div>
-                            </article>
+                            <?php
+                            set_query_var('post_id', $location_id);
+                            get_template_part('template-parts/components/location-card');
+                            ?>
                     <?php
                         }
                         wp_reset_postdata();
