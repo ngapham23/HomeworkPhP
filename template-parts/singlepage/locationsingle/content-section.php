@@ -32,17 +32,17 @@
                     </div>
                 </div>
                 <div class="location-fulldes-col">
-                    <?php
-                    $full_description_subtitle = get_field('full_description') ?? '';
-                    ?>
                     <h4 class="location-fulldes--title">Full Description</h4>
                     <div class="location-fulldes--subtitle">
                         <?php
-                        if ($full_description_subtitle) {
-                            echo $full_description_subtitle;
+                        $raw_content = get_the_content();
+                        $clean_content = trim(wp_strip_all_tags($raw_content));
+                        if (!empty($clean_content)) {
+                            echo apply_filters('the_content', $raw_content);
                         } else {
                             echo 'No full description available';
-                        }  ?>
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
