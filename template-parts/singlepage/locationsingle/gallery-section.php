@@ -28,10 +28,10 @@
                                     alt="<?php echo esc_attr($gallery[0]['alt']); ?>">
                             </a>
                         <?php endif; ?>
-                        <button class="btn-view-all-photo" onclick="document.querySelector('.glightbox').click();">
+                        <button class="btn-view-all-photo" onclick="document.querySelector('.location-gallery-grid .glightbox').click();">
                             <img class="image-icon"
                                 src="<?php echo get_template_directory_uri(); ?>/assets/image/singlepage/Image.svg" alt="">
-                            <span class="view-all-photo">View All Photo</span>
+                            <span class="view-all-photo"><?php esc_html_e('View All Photo', 'aps-sa'); ?></span>
                         </button>
                     </div>
 
