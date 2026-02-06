@@ -41,17 +41,19 @@ $view_all_link = post_type_exists('equipment') ? get_post_type_archive_link('equ
 
                     ?>
                     <article class="aps-blog__card">
-                        <img class="aps-blog__card-img" src="<?php echo esc_url($thumbnail); ?>"
-                            alt="<?php the_title_attribute(); ?>">
-                        </img>
-                        <div class="aps-blog__card-content">
-                            <h6 class="aps-blog__card-title"><?php the_title(); ?></h6>
-                            <p class="aps-blog__card-text">
-                                <a href="<?php the_permalink(); ?>" class="aps-blog__card-btn">
-                                    <?php esc_html_e('View Details', 'aps-sa'); ?>
-                                </a>
-                            </p>
-                        </div>
+                        <a href="<?php the_permalink(); ?>">
+                            <img class="aps-blog__card-img" src="<?php echo esc_url($thumbnail); ?>"
+                                alt="<?php the_title_attribute(); ?>">
+                            </img>
+                            <div class="aps-blog__card-content">
+                                <h6 class="aps-blog__card-title"><?php the_title(); ?></h6>
+                                <p class="aps-blog__card-text">
+                                    <a href="<?php the_permalink(); ?>" class="aps-blog__card-btn">
+                                        <?php esc_html_e('View Details', 'aps-sa'); ?>
+                                    </a>
+                                </p>
+                            </div>
+                        </a>
                     </article>
                 <?php endwhile;
                 wp_reset_postdata(); ?>
