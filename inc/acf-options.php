@@ -15,10 +15,7 @@ if (function_exists('acf_add_options_page')) {
 // ACF JSON Save Point
 function aps_acf_json_save_point($path)
 {
-
     $path = get_template_directory() . '/framework/acf-options';
-
-
     return $path;
 }
 add_filter('acf/settings/save_json', 'aps_acf_json_save_point');

@@ -39,3 +39,28 @@ function aps_allow_svg_upload($mimes)
     return $mimes;
 }
 add_filter('upload_mimes', 'aps_allow_svg_upload');
+
+// Register Sidebar/Widget Areas
+function aps_register_sidebars()
+{
+    register_sidebar(array(
+        'name' => __('Primary Sidebar', 'aps-park'),
+        'id' => 'sidebar-1',
+        'description' => __('Main sidebar that appears on the right.', 'aps-park'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
+    ));
+
+    register_sidebar(array(
+        'name' => __('Footer Sidebar', 'aps-park'),
+        'id' => 'footer-sidebar',
+        'description' => __('Appears in the footer section.', 'aps-park'),
+        'before_widget' => '<div id="%1$s" class="footer-widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="footer-widget-title">',
+        'after_title' => '</h4>',
+    ));
+}
+add_action('widgets_init', 'aps_register_sidebars');
