@@ -134,30 +134,40 @@ $(document).ready(function () {
             selector: '.glightbox'
         });
 
-        lightbox.on('open', () => {
-            setTimeout(() => {
-                const container = document.querySelector('.gcontainer');
-                if (!container) return;
+        // Hàm cập nhật counter
+        const updateCounter = (instance) => {
+            const container = document.querySelector('.gcontainer');
+            if (!container) return;
 
-                let counter = container.querySelector('.gslide-counter');
-                if (!counter) {
-                    counter = document.createElement('div');
-                    counter.className = 'gslide-counter';
-                    container.appendChild(counter);
-                }
-                const total = lightbox.elements.length;
-                const index = lightbox.index + 1;
-                counter.textContent = `${index} / ${total}`;
-            }, 50);
+            let counter = container.querySelector('.gslide-counter');
+            if (!counter) {
+                counter = document.createElement('div');
+                counter.className = 'gslide-counter';
+                container.appendChild(counter);
+            }
+
+            // Lấy tổng số ảnh trong Gallery hiện tại (group)
+            // GLightbox phân nhóm theo data-gallery
+            const currentGallery = instance.activeSlide.querySelector('.gslide-description') ? 
+                                 instance.elements[instance.index].gallery : 
+                                 instance.elements[instance.index].gallery;
+            
+            // Tìm tất cả phần tử thuộc cùng gallery group
+            const galleryElements = instance.elements.filter(el => el.gallery === currentGallery);
+            const total = galleryElements.length;
+            
+            // Tìm vị trí của ảnh hiện tại trong gallery group
+            const index = galleryElements.findIndex(el => el.href === instance.elements[instance.index].href) + 1;
+            
+            counter.textContent = `${index} / ${total}`;
+        };
+
+        lightbox.on('open', () => {
+            setTimeout(() => updateCounter(lightbox), 50);
         });
 
-        lightbox.on('slide_changed', ({ prev, current }) => {
-            const counter = document.querySelector('.gslide-counter');
-            if (counter) {
-                const total = lightbox.elements.length;
-                const index = current.index + 1;
-                counter.textContent = `${index} / ${total}`;
-            }
+        lightbox.on('slide_changed', () => {
+            updateCounter(lightbox);
         });
     }
 });
