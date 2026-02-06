@@ -1,7 +1,10 @@
 <header class="aps-topbar">
     <div class="aps-container aps-topbar__inner">
+        <?php
+        $header_group = get_field('header_option', 'option');
+        ?>
         <a class="aps-logo aps-logo--desktop" href="<?php echo esc_url(home_url('/')); ?>">
-            <?php $logo = get_field('header_logo', 'option'); ?>
+            <?php $logo = isset($header_group['header_logo']) ? $header_group['header_logo'] : null; ?>
             <?php if ($logo): ?>
                 <img src="<?php echo esc_url(is_array($logo) ? $logo['url'] : $logo); ?>" alt="aps-logo" />
             <?php endif; ?>
@@ -9,7 +12,7 @@
 
 
         <a class="aps-logo aps-logo--mobile" href="<?php echo esc_url(home_url('/')); ?>">
-            <?php $logo_mobile = get_field('header_logo_mobile', 'option'); ?>
+            <?php $logo_mobile = isset($header_group['header_logomobile']) ? $header_group['header_logomobile'] : null; ?>
             <?php if ($logo_mobile): ?>
                 <img src="<?php echo esc_url(is_array($logo_mobile) ? $logo_mobile['url'] : $logo_mobile); ?>"
                     alt="aps-logo" />
@@ -26,10 +29,10 @@
             ));
             ?>
         </nav>
-        <?php $search_icon = get_field('header_search', 'option'); ?>
+        <?php $search_icon = isset($header_group['header_search']) ? $header_group['header_search'] : null; ?>
         <?php if ($search_icon): ?>
             <button class="aps-icon-btn aps-icon-btn--search" aria-label="Search">
-                <?php echo $search_icon; ?>
+                <img src="<?php echo esc_url(is_array($search_icon) ? $search_icon['url'] : $search_icon); ?>" alt="Search" />
             </button>
         <?php endif; ?>
         <button class="aps-mobile-toggle" aria-label="Toggle menu">
@@ -46,6 +49,5 @@
             <input type="hidden" name="post_type" value="location" />
         </form>
     </div>
-
     </div>
 </header>
